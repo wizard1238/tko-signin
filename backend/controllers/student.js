@@ -10,10 +10,10 @@ var studentModel = require('../models/studentModel')
 */
 exports.newStudent = function(req, res, next) {
     var student = new studentModel({
-        firstName: 'Jeremy',
-        lastName: 'Tow',
-        department: 'scouting',
-        grade: 12,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        department: req.body.department,
+        grade: req.body.grade,
     })
     student.save(function(err) {
         if (err) console.log(err)

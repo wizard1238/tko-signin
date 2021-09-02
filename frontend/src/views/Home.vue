@@ -19,24 +19,29 @@
       </tr>
     </table>
 
-    <button @click='newStudent'>New Student</button> 
+    <button @click='toggleNewStudentVue'>New Student</button>
+    <new-student v-if='showNewStudentPane' @created='newStudentCreated'></new-student>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import NewStudentVue from '../components/NewStudent.vue'
 // @ is an alias to /src
-import('axios')
 
 export default {
   name: 'Home',
   data() {
     return {
-      students: null
+      students: null,
+      showNewStudentPane: false
     }
   },
   mounted() {
     this.getStudents()
+  },
+  components: {
+    'NewStudent': NewStudentVue
   },
   methods: {
     getStudents() {
@@ -45,9 +50,12 @@ export default {
       .then(res => {this.students = res.data})
       .catch(err => {console.log(err)})
     },
-    newStudent() {
-      axios.post(this.$api + '/newStudent')
-        .then(() => {this.getStudents()})
+    toggleNewStudentVue() {
+      this.showNewStudentPane = !this.showNewStudentPane
+    },
+    newStudentCreated() {
+      this.getStudents()
+      this.toggleNewStudentVue()
     },
     deleteStudent(id) {
       axios.post(this.$api + '/deleteStudent', {

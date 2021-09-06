@@ -21,7 +21,8 @@ export default {
     },
     methods: {
         getCode() {
-            axios.post(this.$api + '/qr', {
+            console.log(process.env.VUE_APP_API_URL)
+            axios.post(process.env.VUE_APP_API_URL + '/qr', {
                 link: this.studentId
             })
             .then((res) => {this.qrCode = res.data})

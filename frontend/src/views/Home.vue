@@ -4,7 +4,7 @@
       <div class="hero-body">
         <div class="container">
           <h3 v-if="$auth.isAuthenticated" class="is-size-3 welcome">
-            Welcome, {{ $auth.user.name }}!
+            {{ $auth.user.name }}
           </h3>
         </div>
       </div>

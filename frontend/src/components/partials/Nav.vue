@@ -18,8 +18,10 @@
     </div>
     <div id="navbar" class="navbar-menu">
       <div class="navbar-start">
-        <router-link to="/" class="navbar-item">Home</router-link>
-        <router-link to="/about" class="navbar-item">About</router-link>
+        <router-link to="/" class="navbar-item">Dashboard</router-link>
+        <router-link to="/mainsite" class="navbar-item"
+          >AMHS Robotics</router-link
+        >
       </div>
       <div class="navbar-end">
         <div class="navbar-item">
@@ -65,6 +67,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+#navbar {
+  margin-left: 3%;
+}
 nav {
   margin-top: 25px;
   margin-bottom: 30px;

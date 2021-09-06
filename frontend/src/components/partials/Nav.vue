@@ -6,17 +6,18 @@
       </a>
       <a
         role="button"
-        class="navbar-burger burger"
+        class="navbar-burger"
         aria-label="menu"
         aria-expanded="false"
-        data-target="navbarBasicExample"
+        id="nav-click"
+        @click="toggleNavbar"
       >
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
       </a>
     </div>
-    <div id="navbar" class="navbar-menu">
+    <div id="navbar-m" class="navbar-menu">
       <div class="navbar-start">
         <router-link to="/dashboard" class="navbar-item">Dashboard</router-link>
         <router-link to="/mainsite" class="navbar-item"
@@ -67,11 +68,22 @@ export default {
         returnTo: window.location.origin,
       });
     },
+    toggleNavbar() {
+      let obj = document.getElementById("nav-click");
+      let nav_menu = document.getElementById("navbar-m");
+      if (obj.classList.contains("is-active")) {
+        obj.classList.remove("is-active");
+        nav_menu.classList.remove("is-active");
+      } else {
+        obj.classList.add("is-active");
+        nav_menu.classList.add("is-active");
+      }
+    },
   },
 };
 </script>
 <style lang="scss" scoped>
-#navbar {
+#navbar-m {
   margin-left: 3%;
 }
 nav {

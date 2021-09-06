@@ -1,16 +1,25 @@
 <template>
   <div class="home">
-    <section class="hero">
+    <section class="hero is-medium">
       <div class="hero-body">
         <div class="container">
-          <div class="columns is-mobile is-centered is-vcentered">
+          <div class="columns is-desktop is-centered is-vcentered">
             <div class="column">
-              <img src="https://i.imgur.com/PuOdxL5.png" alt="" />
+              <img
+                style="max-width: 250px"
+                src="https://i.imgur.com/KrUxjBa.png"
+                alt=""
+              />
             </div>
             <div class="column">
               <span class="title">TKO Attendance Log</span><br /><br />
               <span class="subtitle" v-if="!$auth.isAuthenticated">
-                <a @click="login" class="button is-light">Sign in now</a>
+                <a
+                  @click="login"
+                  id="sign-in-now-button"
+                  class="button is-light"
+                  >Sign in now</a
+                >
                 to view stats.
               </span>
             </div>
@@ -27,6 +36,7 @@ export default {
   methods: {
     // Log the user in
     login() {
+      document.getElementById("sign-in-now-button").classList.add("is-loading");
       this.$auth.checkSession();
     },
   },

@@ -11,12 +11,38 @@
               {{ $auth.user.email }}
             </h4>
             <br /><br />
-            <button
-              @click="openQRModal"
-              class="button is-info is-light is-medium"
-            >
-              Display QR
-            </button>
+            <div class="columns">
+              <div class="column is-half is-offset-one-quarter">
+                <article class="message is-link">
+                  <div class="message-header">
+                    <p>Statistics</p>
+                  </div>
+                  <div class="message-body">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    <strong>Pellentesque risus mi</strong>, tempus quis placerat
+                    ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet
+                    fringilla. Nullam gravida purus diam, et dictum
+                    <a>felis venenatis</a> efficitur. Aenean ac
+                    <em>eleifend lacus</em>, in mollis lectus. Donec sodales,
+                    arcu et sollicitudin porttitor, tortor urna tempor ligula,
+                    id porttitor mi magna a neque. Donec dui urna, vehicula et
+                    sem eget, facilisis sodales sem.
+                  </div>
+                </article>
+                <button
+                  @click="openQRModal"
+                  class="button is-link is-light is-medium"
+                >
+                  Display QR
+                </button>
+                <button @click="" class="button is-danger is-light is-medium">
+                  Report Absent
+                </button>
+                <button @click="" class="button is-primary is-light is-medium">
+                  Settings
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -135,6 +161,10 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+button {
+  margin: 2%;
+}
+
 .regenerate-button {
   margin-bottom: 5px;
 }

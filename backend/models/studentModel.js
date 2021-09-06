@@ -4,13 +4,16 @@ var studentSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
     email: String,
+    password: String,
     department: {
         type: String,
         enum: [
-            'programming',
-            'scouting',
-            'subsystems',
-        ]
+            "programming",
+            "scouting",
+            "subsystems",
+            "undeclared",
+        ],
+        default: "undeclared"
     },
     admin: {
         type: Boolean,

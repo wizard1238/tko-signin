@@ -1,74 +1,58 @@
 <template>
   <div class="home">
-    <table>
-      <tr>
-        <th>Name</th>
-        <th>Department</th>
-        <th>Grade</th>
-        <th>Present</th>
-        <th>Total Time</th>
-      </tr>
-      <tr v-for='student in students' v-bind:key='student'>
-        <td>{{student.firstName + " "+ student.lastName}}</td>
-        <td>{{student.department}}</td>
-        <td>{{student.grade}}</td>
-        <td>{{student.present}}</td>
-        <td>{{student.totalSeconds}}</td>
-        <button @click='deleteStudent(student._id)'>del</button>
-        <button @click='scan(student._id)'>Scan</button>
-      </tr>
-    </table>
-
-    <button @click='toggleNewStudentVue'>New Student</button>
-    <new-student v-if='showNewStudentPane' @created='newStudentCreated'></new-student>
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container">
+          <h3 v-if="$auth.isAuthenticated" class="is-size-3 welcome">
+            {{ $auth.user.name }}
+          </h3>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
-import NewStudentVue from '../components/NewStudent.vue'
-// @ is an alias to /src
-
 export default {
-  name: 'Home',
-  data() {
-    return {
-      students: null,
-      showNewStudentPane: false
-    }
-  },
-  mounted() {
-    this.getStudents()
-  },
-  components: {
-    'NewStudent': NewStudentVue
-  },
-  methods: {
-    getStudents() {
-      axios
-      .get(this.$api + '/students')
-      .then(res => {this.students = res.data})
-      .catch(err => {console.log(err)})
-    },
-    toggleNewStudentVue() {
-      this.showNewStudentPane = !this.showNewStudentPane
-    },
-    newStudentCreated() {
-      this.getStudents()
-      this.toggleNewStudentVue()
-    },
-    deleteStudent(id) {
-      axios.post(this.$api + '/deleteStudent', {
-        studentId: id,
-      })
-        .then(() => {this.getStudents()})
-    },
-    scan(id) {
-      axios.post(this.$api + '/scanned', {
-        studentId: id,
-      })
-        .then(() => {this.getStudents()})
-    }
+  name: "home",
+  components: {},
+};
+</script>
+<style lang="scss" scoped>
+.hero {
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 400px;
+}
+.hero-body .title {
+  padding: 40px 0 20px 0;
+  font-size: 60px;
+}
+.subtitle {
+  font-size: 30px;
+}
+.button-block {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  position: absolute;
+  bottom: -150px;
+  .button {
+    margin-right: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  .welcome {
+    width: 400px;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
-</script>
+.is-xl {
+  font-size: 1.7rem;
+}
+</style>

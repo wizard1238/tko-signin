@@ -38,12 +38,12 @@ export default {
     },
     methods: {
         newStudent() {
-        axios.post(this.$api + '/newStudent', {
-            firstName: this.firstName,
-            lastName: this.lastName,
-            department: this.department,
-            grade: this.grade,
-        })
+            axios.post(this.$api + '/newStudent', {
+                firstName: this.firstName,
+                lastName: this.lastName,
+                department: this.department,
+                grade: this.grade,
+            })
             .then(() => {this.$emit('created')})
         }
     }

@@ -5,6 +5,8 @@ const nodeCanvas = require("canvas");
 
 let options = require("../scripts/options.json");
 
+var fs = require("fs")
+
 exports.createQR = function (req, res, next) {
   if (req.body.link == null) {
     res.status(404);
@@ -17,11 +19,8 @@ exports.createQR = function (req, res, next) {
     nodeCanvas,
     ...options,
   });
+
   qrcode.getRawData("png").then((buffer) => {
-    res.writeHead(200, {
-      "Content-Type": "image/png",
-      "Content-Length": buffer.length,
-    });
-    res.end(buffer);
+    res.send(buffer.toString('base64'))
   });
 };

@@ -11,6 +11,10 @@ var studentSchema = new mongoose.Schema({
             'subsystems',
         ]
     },
+    admin: {
+        type: Boolean,
+        default: false
+    },
     grade: Number,
     present: {
         type: Boolean,

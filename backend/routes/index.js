@@ -7,25 +7,10 @@ var qr = require("../controllers/qr");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.send({
-    students: [
-      {
-        firstName: "Jeremy",
-        lastName: "Tow",
-        department: "Scouting",
-        grade: 12,
-      },
-      {
-        firstName: "Jeremy",
-        lastName: "Tow",
-        department: "Scouting",
-        grade: 12,
-      },
-    ],
-  });
+  res.send("hi");
 });
 
-router.get("/qr", qr.createQR);
+router.post("/qr", qr.createQR);
 router.post("/newStudent", student.newStudent);
 router.get("/students", student.getStudents);
 router.post("/deleteStudent", student.deleteStudent);

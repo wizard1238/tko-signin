@@ -16,7 +16,7 @@ exports.newStudent = function (req, res, next) {
   });
   student.save(function (err, room) {
     if (err) console.log(err);
-    res.send(room._id);
+    res.send(student);
   });
 };
 

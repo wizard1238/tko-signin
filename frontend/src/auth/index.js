@@ -87,6 +87,14 @@ export const useAuth0 = ({
       async checkSession(o) {
         try {
           const token = await this.auth0Client.getTokenSilently();
+          axios.get(process.env.VUE_APP_API_URL + "/students").then((res) => {
+            for (const obj in res.data) {
+              if (res.data[obj].email === this.user.email) {
+                this.dbUser = res.data[obj];
+                return;
+              }
+            }
+          });
         } catch (e) {
           this.auth0Client.loginWithRedirect();
         }
@@ -115,6 +123,7 @@ export const useAuth0 = ({
           axios.get(process.env.VUE_APP_API_URL + "/students").then((res) => {
             for (const obj in res.data) {
               if (res.data[obj].email === this.user.email) {
+                this.dbUser = res.data[obj];
                 return;
               }
             }
@@ -125,6 +134,7 @@ export const useAuth0 = ({
                 email: this.user.email,
               })
               .then((res) => {
+                this.dbUser = res.data;
                 this.$emit("created");
               });
           });

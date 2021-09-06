@@ -3,6 +3,7 @@ var mongoose = require('mongoose')
 var studentSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
+    email: String,
     department: {
         type: String,
         enum: [

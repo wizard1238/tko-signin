@@ -5,15 +5,64 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors')
 var mongoose = require('mongoose')
+var bcrypt = require("bcrypt")
+var session = require("express-session")
+var bodyParser = require("body-parser")
+var MongoStore = require("connect-mongo")
+require("dotenv").config()
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
 
-app.use(cors())
+mongoose.connect(process.env.MONGODB)
 
-mongoose.connect('mongodb://localhost:27017/signin')
+var passport = require('passport')
+var studentModel = require('./models/studentModel')
+var LocalStrategy = require('passport-local').Strategy
+
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+  },
+  function(username, password, done) {
+    studentModel.findOne({ email: username }, function(err, found) {
+      if (!found) {
+        done(null, false)
+      } else {
+        bcrypt.compare(password, found.password, function(err, result) {
+          if (result) {
+            return done(null, found)
+          } else {
+            return done(null, false)
+          }
+        })
+      }
+    })
+  }
+))
+
+passport.serializeUser(function(user, done) {
+  done(null, user._id)
+})
+
+passport.deserializeUser(function(id, done) {
+  studentModel.findById(id, function(err, user) {
+    done(err, user)
+  })
+})
+
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false,
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+app.use(cors())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

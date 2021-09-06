@@ -31,14 +31,9 @@
                 </article>
                 <QRWidget />
                 <button @click="" class="button is-danger is-light is-medium">
-                  Report Absent
+                  Report Absence
                 </button>
-                <button
-                  @click="getUser"
-                  class="button is-primary is-light is-medium"
-                >
-                  Settings
-                </button>
+                <Profile />
               </div>
             </div>
           </div>
@@ -50,17 +45,15 @@
 
 <script>
 import QRWidget from "../components/DisplayQR";
+import ProfileWidget from "../components/Profile";
 
 export default {
   name: "Dashboard",
   components: {
     QRWidget: QRWidget,
+    Profile: ProfileWidget,
   },
-  methods: {
-    getUser() {
-      console.log(this.$auth.dbUser);
-    },
-  },
+  methods: {},
 };
 </script>
 <style lang="scss" scoped>

@@ -13,6 +13,14 @@ import { Auth0Plugin } from "./auth";
 import Fragment from "vue-fragment";
 Vue.use(Fragment.Plugin);
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+library.add(faAngleDown);
+
+Vue.component("font-awesome-icon", FontAwesomeIcon);
+
 // Install the authentication plugin here
 Vue.use(Auth0Plugin, {
   domain,

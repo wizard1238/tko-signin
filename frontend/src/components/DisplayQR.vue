@@ -64,6 +64,7 @@ export default {
     },
     closeQRModal() {
       document.getElementById("qr-modal").classList.remove("is-active");
+      document.getElementsByTagName("html")[0].classList.remove("is-clipped");
     },
     toggleQR() {
       if (this.toggleType === "Student ID") {

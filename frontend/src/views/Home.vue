@@ -3,9 +3,11 @@
     <section class="hero">
       <div class="hero-body">
         <div class="container">
-          <h3 v-if="$auth.isAuthenticated" class="is-size-3 welcome">
-            {{ $auth.user.name }}
-          </h3>
+          <div class="auth-user-container" v-if="$auth.isAuthenticated">
+            <h3 class="is-size-3 welcome">
+              {{ $auth.user.name }}
+            </h3>
+          </div>
         </div>
       </div>
     </section>

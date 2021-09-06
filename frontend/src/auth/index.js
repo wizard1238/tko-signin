@@ -81,6 +81,14 @@ export const useAuth0 = ({
       logout(o) {
         return this.auth0Client.logout(o);
       },
+
+      async checkSession(o) {
+        try {
+          const token = await this.auth0Client.getTokenSilently();
+        } catch (e) {
+          this.auth0Client.loginWithRedirect();
+        }
+      },
     },
     /** Use this lifecycle method to instantiate the SDK client */
     async created() {
@@ -90,6 +98,7 @@ export const useAuth0 = ({
         client_id: options.clientId,
         audience: options.audience,
         redirect_uri: redirectUri,
+        cacheLocation: "localstorage",
       });
 
       try {

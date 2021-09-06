@@ -18,7 +18,7 @@
     </div>
     <div id="navbar" class="navbar-menu">
       <div class="navbar-start">
-        <router-link to="/" class="navbar-item">Dashboard</router-link>
+        <router-link to="/dashboard" class="navbar-item">Dashboard</router-link>
         <router-link to="/mainsite" class="navbar-item"
           >AMHS Robotics</router-link
         >
@@ -33,6 +33,7 @@
                 v-if="!$auth.isAuthenticated"
                 @click="login"
                 class="button is-dark"
+                id="signin-button"
                 ><strong>Sign in</strong></a
               >
               <!-- show logout when authenticated -->
@@ -40,6 +41,7 @@
                 v-if="$auth.isAuthenticated"
                 @click="logout"
                 class="button is-dark"
+                id="logout-button"
                 ><strong>Log out</strong></a
               >
             </div>
@@ -55,10 +57,12 @@ export default {
   methods: {
     // Log the user in
     login() {
+      document.getElementById("signin-button").classList.add("is-loading");
       this.$auth.checkSession();
     },
     // Log the user out
     logout() {
+      document.getElementById("logout-button").classList.add("is-loading");
       this.$auth.logout({
         returnTo: window.location.origin,
       });

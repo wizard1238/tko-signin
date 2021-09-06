@@ -3,10 +3,17 @@
     <section class="hero">
       <div class="hero-body">
         <div class="container">
-          <div class="auth-user-container" v-if="$auth.isAuthenticated">
-            <h3 class="is-size-3 welcome">
-              {{ $auth.user.name }}
-            </h3>
+          <div class="columns is-mobile is-centered is-vcentered">
+            <div class="column">
+              <img src="https://i.imgur.com/PuOdxL5.png" alt="" />
+            </div>
+            <div class="column">
+              <span class="title">TKO Attendance Log</span><br /><br />
+              <span class="subtitle" v-if="!$auth.isAuthenticated">
+                <a @click="login" class="button is-light">Sign in now</a>
+                to view stats.
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -17,7 +24,12 @@
 <script>
 export default {
   name: "home",
-  components: {},
+  methods: {
+    // Log the user in
+    login() {
+      this.$auth.checkSession();
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -34,6 +46,7 @@ export default {
 }
 .subtitle {
   font-size: 30px;
+  margin-top: 5% !important;
 }
 .button-block {
   text-align: center;

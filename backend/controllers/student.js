@@ -1,35 +1,34 @@
-var studentModel = require('../models/studentModel')
+var studentModel = require("../models/studentModel");
 
 /**
  * Creates a new student in the database. Does NOT write NFC card.
- * Data fields: 
+ * Data fields:
  *  req.body.firstName
  *  req.body.lastName
  *  req.body.department
  *  req.body.grade
-*/
-exports.newStudent = function(req, res, next) {
-    var student = new studentModel({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        department: req.body.department,
-        grade: req.body.grade,
-    })
-    student.save(function(err) {
-        if (err) console.log(err)
-        res.sendStatus(200)
-    })
-}
+ */
+exports.newStudent = function (req, res, next) {
+  var student = new studentModel({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+  });
+  student.save(function (err, room) {
+    if (err) console.log(err);
+    res.send(room._id);
+  });
+};
 
 /**
  * Gets all students
  */
-exports.getStudents = function(req, res, next) {
-    studentModel.find({}, function(err, students) {
-        if (err) console.log(err)
-        res.send(students)
-    })
-}
+exports.getStudents = function (req, res, next) {
+  studentModel.find({}, function (err, students) {
+    if (err) console.log(err);
+    res.send(students);
+  });
+};
 
 /**
  * Updates student details
@@ -39,18 +38,15 @@ exports.getStudents = function(req, res, next) {
  *  req.body.department
  *  req.body.grade
  */
-exports.updateStudent = function(req, res, next) {
-
-}
+exports.updateStudent = function (req, res, next) {};
 
 /**
  * Deletes student
  * Data fields:
  *  req.body.studentId
  */
-exports.deleteStudent = function(req, res, next) {
-    studentModel.deleteOne({_id: req.body.studentId})
-        .then(() => {
-            res.sendStatus(200)
-        })
-}
+exports.deleteStudent = function (req, res, next) {
+  studentModel.deleteOne({ _id: req.body.studentId }).then(() => {
+    res.sendStatus(200);
+  });
+};

@@ -1,9 +1,11 @@
 import Vue from "vue";
 import createAuth0Client from "@auth0/auth0-spa-js";
+import axios from "axios";
 
 /** Define a default action to perform after authentication */
-const DEFAULT_REDIRECT_CALLBACK = () =>
+const DEFAULT_REDIRECT_CALLBACK = () => {
   window.history.replaceState({}, document.title, window.location.pathname);
+};
 
 let instance;
 
@@ -13,7 +15,7 @@ export const getInstance = () => instance;
 /** Creates an instance of the Auth0 SDK. If one has already been created, it returns that instance */
 export const useAuth0 = ({
   onRedirectCallback = DEFAULT_REDIRECT_CALLBACK,
-  redirectUri = window.location.origin,
+  redirectUri = window.location.origin + "/dashboard",
   ...options
 }) => {
   if (instance) return instance;
@@ -109,6 +111,23 @@ export const useAuth0 = ({
         ) {
           // handle the redirect and retrieve tokens
           const { appState } = await this.auth0Client.handleRedirectCallback();
+
+          axios.get(process.env.VUE_APP_API_URL + "/students").then((res) => {
+            for (const obj in res.data) {
+              if (res.data[obj].email === this.user.email) {
+                return;
+              }
+            }
+            axios
+              .post(process.env.VUE_APP_API_URL + "/newStudent", {
+                firstName: this.user.name.split(" ")[0],
+                lastName: this.user.name.split(" ")[1],
+                email: this.user.email,
+              })
+              .then((res) => {
+                this.$emit("created");
+              });
+          });
 
           // Notify subscribers that the redirect callback has happened, passing the appState
           // (useful for retrieving any pre-authentication state)

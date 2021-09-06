@@ -19,7 +19,10 @@ var studentSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    grade: Number,
+    grade: {
+        type: Number,
+        default: 0
+    },
     present: {
         type: Boolean,
         default: false

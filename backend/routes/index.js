@@ -13,7 +13,6 @@ router.get("/", function (req, res, next) {
 });
 
 router.post("/qr", qr.createQR);
-// router.post("/newStudent", student.newStudent);
 
 router.get("/students", student.getStudents);
 router.post("/deleteStudent", student.deleteStudent);

@@ -3,6 +3,12 @@ var studentModel = require('../models/studentModel')
 
 module.exports = new checkSchema({
     email: {
+        isLength: {
+            errorMessage: "Please provide an email",
+            options: {
+                min: 1
+            }
+        },
         isEmail: {
             errorMessage: "Email has to be valid"
         },
@@ -28,10 +34,22 @@ module.exports = new checkSchema({
         escape: {}
     },
     firstName: {
+        isLength: {
+            errorMessage: "Please provide a first name",
+            options: {
+                min: 1
+            }
+        },
         escape: {},
         trim: {}
     },
     lastName: {
+        isLength: {
+            errorMessage: "Please provide a last name",
+            options: {
+                min: 1
+            }
+        },
         escape: {},
         trim: {}
     }

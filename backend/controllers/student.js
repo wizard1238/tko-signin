@@ -1,26 +1,6 @@
 var studentModel = require("../models/studentModel");
 
 /**
- * Creates a new student in the database. Does NOT write NFC card.
- * Data fields:
- *  req.body.firstName
- *  req.body.lastName
- *  req.body.department
- *  req.body.grade
- */
-exports.newStudent = function (req, res, next) {
-  var student = new studentModel({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-  });
-  student.save(function (err, room) {
-    if (err) console.log(err);
-    res.send(student);
-  });
-};
-
-/**
  * Gets all students
  */
 exports.getStudents = function (req, res, next) {

@@ -10,7 +10,7 @@
                 <div class="control has-icons-left">
                   <input
                     type="email"
-                    placeholder="e.g. bobsmith@gmail.com"
+                    placeholder="e.g. tko@gmail.com"
                     class="input"
                     required
                   />

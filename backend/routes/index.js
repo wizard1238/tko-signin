@@ -14,10 +14,7 @@ router.get("/", function (req, res, next) {
 
 router.post("/qr", qr.createQR);
 // router.post("/newStudent", student.newStudent);
-router.post("/signup", auth.signup)
-router.post("/login", passport.authenticate("local"), function(req, res, next) {
-  res.send(req.user)
-})
+
 router.get("/students", student.getStudents);
 router.post("/deleteStudent", student.deleteStudent);
 router.post("/scanned", signin.scanned);

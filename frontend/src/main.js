@@ -9,6 +9,7 @@ import { domain, clientId } from "../auth_config.json";
 
 // Import the plugin here
 import { Auth0Plugin } from "./auth";
+import { AuthPlugin } from "./auth/custom_auth";
 
 import Fragment from "vue-fragment";
 Vue.use(Fragment.Plugin);
@@ -33,6 +34,8 @@ Vue.use(Auth0Plugin, {
     );
   },
 });
+
+Vue.use(AuthPlugin);
 
 Vue.config.productionTip = false;
 

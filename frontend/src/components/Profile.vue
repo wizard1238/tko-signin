@@ -126,7 +126,7 @@ export default {
   name: "ProfileWidget",
   data() {
     return {
-      grade: undefined
+      grade: undefined,
       department: undefined,
     };
   },

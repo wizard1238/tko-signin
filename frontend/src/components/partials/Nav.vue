@@ -30,6 +30,9 @@
             <!-- Check that the SDK client is not currently loading before accessing is methods -->
             <div v-if="!$auth.loading">
               <!-- show login when not authenticated -->
+              <router-link to="/signup" class="button is-dark"
+                >Sign up</router-link
+              >
               <a
                 v-if="!$auth.isAuthenticated"
                 @click="login"

@@ -4,6 +4,7 @@ import Dashboard from "../views/Dashboard.vue";
 import Vue from "vue";
 import VueRouter from "vue-router";
 import { authGuard } from "../auth/authGuard";
+import Signup from "../views/Signup";
 
 Vue.use(VueRouter);
 
@@ -24,6 +25,11 @@ const routes = [
     beforeEnter() {
       location.href = "https://amhsrobotics.com";
     },
+  },
+  {
+    path: "/signup",
+    name: "Signup",
+    component: Signup,
   },
 ];
 

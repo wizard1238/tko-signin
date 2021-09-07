@@ -1,0 +1,25 @@
+services:
+  backend:
+    build: ./backend
+    environment:
+      - SECRET=supersecretsecretsyay
+      - MONGODB=mongodb://root:welcome@mongo:27017/signin?authSource=admin
+  frontend:
+    build: ./frontend
+    environment:
+      - VUE_APP_API_URL=http://backend:3000
+  nginx:
+    build: ./nginx
+    ports: 
+      - "80:80"
+  mongo:
+    image: mongo
+    ports: 
+      - "27017:27017"
+    environment: 
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: welcome
+    volumes:
+      - mongo_files:/data/db
+volumes:
+  mongo_files:

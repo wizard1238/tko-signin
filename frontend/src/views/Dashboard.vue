@@ -25,18 +25,45 @@
               <div class="column is-half is-offset-one-quarter">
                 <article class="message is-link">
                   <div class="message-header">
-                    <p>Statistics</p>
+                    <p>Details</p>
                   </div>
                   <div class="message-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    <strong>Pellentesque risus mi</strong>, tempus quis placerat
-                    ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet
-                    fringilla. Nullam gravida purus diam, et dictum
-                    <a>felis venenatis</a> efficitur. Aenean ac
-                    <em>eleifend lacus</em>, in mollis lectus. Donec sodales,
-                    arcu et sollicitudin porttitor, tortor urna tempor ligula,
-                    id porttitor mi magna a neque. Donec dui urna, vehicula et
-                    sem eget, facilisis sodales sem.
+                    <div class="columns is-vcentered">
+                      <div class="column">
+                        <h3
+                          class="is-size-6 has-text-left has-text-weight-bold"
+                        >
+                          Department:
+                          <span class="has-text-weight-normal">{{
+                            this.$store.state.dbUser.department.capitalize()
+                          }}</span>
+                        </h3>
+                        <br />
+                        <h3
+                          class="is-size-6 has-text-left has-text-weight-bold"
+                        >
+                          Grade:
+                          <span class="has-text-weight-normal">{{
+                            this.$store.state.dbUser.grade
+                          }}</span>
+                        </h3>
+                      </div>
+                      <div class="column">
+                        <div class="columns is-vcentered">
+                          <div class="column is-5">
+                            <h3
+                              class="is-size-4 has-text-left has-text-weight-bold"
+                              style="display: inline-block"
+                            >
+                              Streak:
+                            </h3>
+                          </div>
+                          <div class="column is-3">
+                            <button class="button is-link">0</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </article>
                 <QRWidget />
@@ -61,9 +88,10 @@
                       >Display QR Scanner</router-link
                     >
                     <br /><br />
-                    <router-link to="/scan" class="button is-warning "
+                    <router-link to="#" class="button is-warning "
                       >Student Data</router-link
                     >
+                    <button @click="test">test</button>
                   </div>
                 </article>
               </div>
@@ -85,7 +113,11 @@ export default {
     QRWidget: QRWidget,
     Profile: ProfileWidget,
   },
-  methods: {},
+  methods: {
+    test() {
+      console.log(this.$store.state.dbUser);
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

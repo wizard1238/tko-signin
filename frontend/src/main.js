@@ -68,6 +68,10 @@ Vue.config.productionTip = false;
 
 import { store } from "./store/index";
 
+String.prototype.capitalize = function() {
+  return this.charAt(0).toUpperCase() + this.slice(1);
+};
+
 new Vue({
   router,
   store,

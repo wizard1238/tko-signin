@@ -86,13 +86,54 @@
                     </h3>
                     <hr style="background-color: #BEBBBB" />
                     <br />
-                    <router-link to="/scan" class="button is-danger "
+                    <router-link to="/scan" class="button is-warning "
                       >Display QR Scanner</router-link
                     >
                     <br /><br />
                     <router-link to="/studentdata" class="button is-warning "
                       >Student Data</router-link
                     >
+                    <br /><br />
+                    <button
+                      @click="openAYS"
+                      id="signoutall"
+                      class="button is-danger"
+                    >
+                      Sign Out ALL Students
+                    </button>
+                    <div id="areyousure" class="modal">
+                      <div class="modal-background"></div>
+                      <div class="modal-content">
+                        <div class="card">
+                          <div class="card-content">
+                            <div class="content" id="flex-content">
+                              <h1 class="is-size-4 has-text-centered">
+                                Are you sure you want to sign everyone out?
+                              </h1>
+                              <div id="button-holder" class="buttons">
+                                <button
+                                  @click="signoutall"
+                                  class="button is-danger is-light"
+                                >
+                                  Yes
+                                </button>
+                                <button
+                                  @click="closeAYS"
+                                  class="button is-success is-light"
+                                >
+                                  No
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button
+                        @click="closeAYS"
+                        class="modal-close is-large"
+                        aria-label="close"
+                      ></button>
+                    </div>
                     <!-- <button @click="test">test</button> -->
                   </div>
                 </article>
@@ -122,12 +163,35 @@ export default {
     test() {
       console.log(this.$store.state.dbUser);
     },
+    signoutall() {
+      this.$store.dispatch("signEveryoneOut");
+      this.closeAYS();
+    },
+    openAYS() {
+      document.getElementById("areyousure").classList.add("is-active");
+      document.getElementsByTagName("html")[0].classList.add("is-clipped");
+    },
+    closeAYS() {
+      document.getElementById("areyousure").classList.remove("is-active");
+      document.getElementsByTagName("html")[0].classList.remove("is-clipped");
+    },
   },
 };
 </script>
 <style lang="scss" scoped>
+#signoutall {
+  margin: 0 !important;
+}
+
 button {
   margin: 2%;
+}
+
+#button-holder {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .admin-panel {

@@ -30,8 +30,6 @@
                       { id: 3, name: '11' },
                       { id: 4, name: '12' },
                     ]"
-                    v-on:selected=""
-                    v-on:filter=""
                     :disabled="false"
                     name="grades"
                     :maxItem="10"
@@ -50,20 +48,21 @@
                 <div class="dropdown-container">
                   <Dropdown
                     :options="[
-                      { id: 1, name: 'Programming' },
-                      { id: 2, name: 'Subsystems' },
-                      { id: 3, name: 'Electronics' },
-                      { id: 4, name: 'Fabrication' },
-                      { id: 5, name: 'Media' },
-                      { id: 6, name: 'Business' },
-                      { id: 7, name: 'Design' },
-                      { id: 8, name: 'Outreach' },
+                      { id: 1, name: 'Rookie' },
+                      { id: 2, name: 'Programming' },
+                      { id: 3, name: 'Subsystems' },
+                      { id: 4, name: 'Electronics' },
+                      { id: 5, name: 'Chassis' },
+                      { id: 6, name: 'Media' },
+                      { id: 7, name: 'Business' },
+                      { id: 8, name: 'Design' },
+                      { id: 9, name: 'Outreach' },
+                      { id: 10, name: 'Scouting' },
+                      { id: 11, name: 'Undeclared' },
                     ]"
-                    v-on:selected=""
-                    v-on:filter=""
                     :disabled="false"
                     name="departments"
-                    :maxItem="10"
+                    :maxItem="11"
                     placeholder="Please select an option"
                   >
                   </Dropdown>

@@ -18,7 +18,7 @@ const store = new Vuex.Store({
     signUpWithEmailPass(state, { options }) {
       return new Promise((resolve, reject) => {
         axios
-          .post("http://localhost:3000/signup", {
+          .post(process.env.VUE_APP_API_URL + "/signup", {
             email: options.email,
             password: options.password,
             firstName: options.first,
@@ -45,7 +45,7 @@ const store = new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios({
           method: "post",
-          url: "http://localhost:3000/login",
+          url: process.env.VUE_APP_API_URL + "/login",
           data: {
             email: options.email,
             password: options.password,
@@ -64,13 +64,20 @@ const store = new Vuex.Store({
           });
       });
     },
+    signEveryoneOut(state) {
+      axios({
+        method: "post",
+        url: process.env.VUE_APP_API_URL + "/signEveryoneOut",
+        withCredentials: true,
+      });
+    },
     logout(state) {
       store.commit("changeUser", {
         user: undefined,
       });
       axios({
         method: "post",
-        url: "http://localhost:3000/logout",
+        url: process.env.VUE_APP_API_URL + "/logout",
         withCredentials: true,
       });
     },
@@ -78,7 +85,7 @@ const store = new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios({
           method: "post",
-          url: "http://localhost:3000/scanned",
+          url: process.env.VUE_APP_API_URL + "/scanned",
           data: {
             studentId: studentId,
           },
@@ -91,7 +98,7 @@ const store = new Vuex.Store({
     retrieveNewData(state) {
       axios({
         method: "post",
-        url: "http://localhost:3000/user",
+        url: process.env.VUE_APP_API_URL + "/user",
         withCredentials: true,
       }).then((res) => {
         store.commit("changeUser", {
@@ -102,7 +109,7 @@ const store = new Vuex.Store({
     updateUser(state, { options }) {
       axios({
         method: "post",
-        url: "http://localhost:3000/update",
+        url: process.env.VUE_APP_API_URL + "/update",
         data: {
           studentId: store.state.dbUser._id,
           firstName: store.state.dbUser.firstName,

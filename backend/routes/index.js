@@ -8,6 +8,8 @@ var signin = require("../controllers/signin");
 var auth = require("../controllers/auth");
 var qr = require("../controllers/qr");
 
+var userModel = require("../models/studentModel");
+
 var updateValidator = require("../validators/updateValidator");
 var scanValidator = require("../validators/scanValidator");
 
@@ -27,5 +29,28 @@ router.post(
 );
 router.post("/deleteStudent", authMiddleware(true), student.deleteStudent);
 router.post("/scanned", authMiddleware(true), scanValidator, signin.scanned);
+
+router.post(
+  "/signEveryoneOut",
+  authMiddleware(true),
+  function (req, res, next) {
+    userModel.find({}, function (err, students) {
+      var promises = [];
+      for (var student of students) {
+        var promise = new Promise((resolve, reject) => {
+          student.present = false;
+          student.save(function (err) {
+            if (err) console.log(err);
+            resolve();
+          });
+        });
+        promises.push(promise);
+      }
+      Promise.all(promises).then(() => {
+        res.sendStatus(200);
+      });
+    });
+  }
+);
 
 module.exports = router;

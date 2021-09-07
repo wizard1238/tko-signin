@@ -39,8 +39,22 @@ module.exports = new checkSchema({
   department: {
     isIn: {
       errorMessage:
-        "department must be one of programming, scouting, subsystems, undeclared",
-      options: [["programming", "scouting", "subsystems", "undeclared"]],
+        "department must be one of undeclared, rookie, programming, subsystems, electronics, chassis, media, business, design, outreach, scouting",
+      options: [
+        [
+          "undeclared",
+          "rookie",
+          "programming",
+          "subsystems",
+          "electronics",
+          "chassis",
+          "media",
+          "business",
+          "design",
+          "outreach",
+          "scouting",
+        ],
+      ],
     },
   },
   grade: {

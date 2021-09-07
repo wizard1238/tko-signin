@@ -13,7 +13,9 @@ export default {
   },
   methods: {
     onDecode(decodedString) {
-      console.log(decodedString);
+      this.$store.dispatch("studentScanned", {
+        studentId: decodedString,
+      });
     },
   },
 };

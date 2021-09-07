@@ -74,6 +74,16 @@ const store = new Vuex.Store({
         withCredentials: true,
       });
     },
+    studentScanned(state, { studentId_ }) {
+      axios({
+        method: "post",
+        url: "http://localhost:3000/scanned",
+        data: {
+          studentId: studentId_,
+        },
+        withCredentials: true,
+      });
+    },
     updateUser(state, { options }) {
       axios({
         method: "post",

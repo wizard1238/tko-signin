@@ -18,9 +18,14 @@ router.get("/", function (req, res, next) {
 
 router.post("/qr", qr.createQR);
 
-router.get("/students", student.getStudents);
-router.post("/update", authMiddleware, updateValidator, student.updateStudent);
-router.post("/deleteStudent", student.deleteStudent);
-router.post("/scanned", authMiddleware, scanValidator, signin.scanned);
+router.get("/students", authMiddleware(true), student.getStudents);
+router.post(
+  "/update",
+  authMiddleware(false),
+  updateValidator,
+  student.updateStudent
+);
+router.post("/deleteStudent", authMiddleware(true), student.deleteStudent);
+router.post("/scanned", authMiddleware(true), scanValidator, signin.scanned);
 
 module.exports = router;

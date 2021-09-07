@@ -1,10 +1,14 @@
 import { store } from "../store/index";
 
 export const adminGuard = (to, from, next) => {
-  if (store.state.dbUser.admin === true) {
-    return next();
+  if (store.state.dbUser === undefined) {
+    return next("/login");
   } else {
-    return next("/");
+    if (store.state.dbUser.admin === true) {
+      return next();
+    } else {
+      return next("/");
+    }
   }
 };
 

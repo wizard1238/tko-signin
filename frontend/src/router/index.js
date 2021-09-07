@@ -7,6 +7,7 @@ import VueRouter from "vue-router";
 import { adminGuard, authGuard } from "../auth/authGuard";
 import Signup from "../views/Signup";
 import QRScanner from "../views/QRScanner";
+import StudentData from "../views/StudentData";
 
 Vue.use(VueRouter);
 
@@ -42,6 +43,12 @@ const routes = [
     path: "/scan",
     name: "QRScanner",
     component: QRScanner,
+    beforeEnter: adminGuard,
+  },
+  {
+    path: "/studentdata",
+    name: "StudentData",
+    component: StudentData,
     beforeEnter: adminGuard,
   },
 ];

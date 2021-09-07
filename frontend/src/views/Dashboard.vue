@@ -55,11 +55,13 @@
                               class="is-size-4 has-text-left has-text-weight-bold"
                               style="display: inline-block"
                             >
-                              Streak:
+                              Present:
                             </h3>
                           </div>
                           <div class="column is-3">
-                            <button class="button is-link">0</button>
+                            <button class="button is-link">
+                              {{ this.$store.state.dbUser.present }}
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -67,9 +69,9 @@
                   </div>
                 </article>
                 <QRWidget />
-                <button @click="" class="button is-danger is-light is-medium">
+                <!-- <button @click="" class="button is-danger is-light is-medium">
                   Report Absence
-                </button>
+                </button> -->
                 <Profile />
 
                 <article
@@ -88,10 +90,10 @@
                       >Display QR Scanner</router-link
                     >
                     <br /><br />
-                    <router-link to="#" class="button is-warning "
+                    <router-link to="/studentdata" class="button is-warning "
                       >Student Data</router-link
                     >
-                    <button @click="test">test</button>
+                    <!-- <button @click="test">test</button> -->
                   </div>
                 </article>
               </div>
@@ -112,6 +114,9 @@ export default {
   components: {
     QRWidget: QRWidget,
     Profile: ProfileWidget,
+  },
+  mounted: function() {
+    this.$store.dispatch("retrieveNewData");
   },
   methods: {
     test() {

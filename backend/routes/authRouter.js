@@ -30,10 +30,10 @@ router.post("/login", function (req, res, next) {
   })(req, res, next);
 });
 
-router.post("/user", authMiddleware, function (req, res, next) {
+router.post("/user", authMiddleware(false), function (req, res, next) {
   res.send(req.user);
 });
-router.post("/logout", authMiddleware, function (req, res, next) {
+router.post("/logout", authMiddleware(false), function (req, res, next) {
   req.logout();
   res.sendStatus(200);
 });

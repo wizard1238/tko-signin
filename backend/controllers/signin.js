@@ -41,7 +41,7 @@ exports.scanned = function (req, res, next) {
     });
     student.save(function (err) {
       if (err) console.log(err);
-      res.sendStatus(200);
+      res.send(student);
     });
   });
 };

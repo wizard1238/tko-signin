@@ -74,14 +74,29 @@ const store = new Vuex.Store({
         withCredentials: true,
       });
     },
-    studentScanned(state, { studentId_ }) {
+    studentScanned(state, { studentId }) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "post",
+          url: "http://localhost:3000/scanned",
+          data: {
+            studentId: studentId,
+          },
+          withCredentials: true,
+        }).then((res) => {
+          resolve(res.data);
+        });
+      });
+    },
+    retrieveNewData(state) {
       axios({
         method: "post",
-        url: "http://localhost:3000/scanned",
-        data: {
-          studentId: studentId_,
-        },
+        url: "http://localhost:3000/user",
         withCredentials: true,
+      }).then((res) => {
+        store.commit("changeUser", {
+          user: res.data,
+        });
       });
     },
     updateUser(state, { options }) {
@@ -96,6 +111,17 @@ const store = new Vuex.Store({
           department: options.department,
         },
         withCredentials: true,
+      });
+    },
+    getAllStudents() {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "get",
+          url: process.env.VUE_APP_API_URL + "/students",
+          withCredentials: true,
+        }).then((res) => {
+          resolve(res.data);
+        });
       });
     },
   },

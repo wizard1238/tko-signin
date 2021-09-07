@@ -3,12 +3,22 @@
     <section class="hero" id="modal-cont">
       <div class="hero-body">
         <div class="container">
-          <div class="auth-user-container" v-if="$auth.isAuthenticated">
+          <div class="auth-user-container">
+            <span
+              v-if="$store.state.dbUser.admin === true"
+              class="tag is-danger is-light"
+              >Admin</span
+            >
             <h3 class="is-size-2 welcome has-text-weight-bold is-family-code">
-              {{ $auth.user.name }}
+              {{
+                $store.state.dbUser.firstName +
+                  " " +
+                  $store.state.dbUser.lastName
+              }}
             </h3>
+
             <h4 class="is-size-5 has-text-weight-light is-family-sans-serif">
-              {{ $auth.user.email }}
+              {{ $store.state.dbUser.email }}
             </h4>
             <br /><br />
             <div class="columns">
@@ -34,6 +44,28 @@
                   Report Absence
                 </button>
                 <Profile />
+
+                <article
+                  class="message is-dark admin-panel"
+                  v-if="$store.state.dbUser.admin === true"
+                >
+                  <div class="message-body">
+                    <h3
+                      class="is-size-5 has-text-left has-text-weight-bold is-family-code"
+                    >
+                      Admin Actions
+                    </h3>
+                    <hr style="background-color: #BEBBBB" />
+                    <br />
+                    <router-link to="/scan" class="button is-danger "
+                      >Display QR Scanner</router-link
+                    >
+                    <br /><br />
+                    <router-link to="/scan" class="button is-warning "
+                      >Student Data</router-link
+                    >
+                  </div>
+                </article>
               </div>
             </div>
           </div>
@@ -59,6 +91,11 @@ export default {
 <style lang="scss" scoped>
 button {
   margin: 2%;
+}
+
+.admin-panel {
+  margin-top: 4%;
+  text-align: left !important;
 }
 
 .regenerate-button {

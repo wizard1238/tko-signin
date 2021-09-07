@@ -8,7 +8,14 @@
       <div class="modal-content">
         <div class="card">
           <header class="card-header">
-            <p class="card-header-title">QR Code - {{ $auth.user.name }}</p>
+            <p class="card-header-title">
+              QR Code -
+              {{
+                $store.state.dbUser.firstName +
+                  " " +
+                  $store.state.dbUser.lastName
+              }}
+            </p>
             <button class="card-header-icon" aria-label="more options">
               <span class="icon">
                 <i class="fas fa-angle-down" aria-hidden="true"></i>
@@ -49,12 +56,9 @@ export default {
   name: "QRWidget",
   data() {
     return {
-      qrCode: undefined,
+      qrCode: "",
       toggleType: "Student ID",
     };
-  },
-  mounted: function() {
-    this.$auth.checkSession();
   },
   methods: {
     openQRModal() {
@@ -79,8 +83,8 @@ export default {
         .post(process.env.VUE_APP_API_URL + "/qr", {
           link:
             this.toggleType === "Student ID"
-              ? this.$auth.dbUser._id
-              : this.$auth.user.email,
+              ? this.$store.state.dbUser._id
+              : this.$store.state.dbUser.email,
         })
         .then((res) => {
           this.qrCode = res.data;

@@ -13,13 +13,11 @@
             </div>
             <div class="column">
               <span class="title">TKO Attendance Log</span><br /><br />
-              <span class="subtitle" v-if="!$auth.isAuthenticated">
-                <a
-                  @click="login"
-                  id="sign-in-now-button"
-                  class="button is-light"
-                  >Sign in now</a
+              <span class="subtitle" v-if="$store.state.dbUser === undefined">
+                <router-link to="/login" class="button is-light"
+                  >Log in now</router-link
                 >
+
                 to view stats.
               </span>
             </div>

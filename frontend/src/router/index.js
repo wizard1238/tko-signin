@@ -4,7 +4,7 @@ import Login from "../views/Login.vue";
 
 import Vue from "vue";
 import VueRouter from "vue-router";
-import { authGuard } from "../auth/authGuard";
+import { adminGuard, authGuard } from "../auth/authGuard";
 import Signup from "../views/Signup";
 import QRScanner from "../views/QRScanner";
 
@@ -42,6 +42,7 @@ const routes = [
     path: "/scan",
     name: "QRScanner",
     component: QRScanner,
+    beforeEnter: adminGuard,
   },
 ];
 

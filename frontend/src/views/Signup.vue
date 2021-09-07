@@ -5,6 +5,9 @@
       <div class="container">
         <div class="columns is-centered">
           <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+            <span class="tag is-danger is-hidden" id="invalid-pass">{{
+              errormsg
+            }}</span>
             <form
               id="signup-form"
               name="signup_form"
@@ -108,6 +111,7 @@
 
 <script>
 import axios from "axios";
+import router from "../router/index";
 
 export default {
   name: "Signup",
@@ -118,6 +122,7 @@ export default {
       email: "",
       pass: "",
       pass2: "",
+      errormsg: "Invalid Parameters",
     };
   },
   methods: {
@@ -131,15 +136,31 @@ export default {
         return;
       }
 
-      this.$store.dispatch("signUpWithEmailPass", {
-        options: {
-          first: this.first,
-          last: this.last,
-          email: this.email,
-          password: this.pass,
-        },
-      });
+      this.$store
+        .dispatch("signUpWithEmailPass", {
+          options: {
+            first: this.first,
+            last: this.last,
+            email: this.email,
+            password: this.pass,
+          },
+        })
+        .then(() => {
+          setTimeout(function() {
+            router.push({ name: "Dashboard" });
+          }, 500);
+        })
+        .catch((e) => {
+          this.errormsg = e[0]["msg"];
+          document.getElementById("signup-b").classList.remove("is-loading");
+          document.getElementById("invalid-pass").classList.remove("is-hidden");
+        });
     },
   },
 };
 </script>
+<style scoped>
+#invalid-pass {
+  margin-bottom: 4%;
+}
+</style>

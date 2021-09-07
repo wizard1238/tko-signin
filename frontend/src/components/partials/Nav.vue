@@ -28,27 +28,34 @@
         <div class="navbar-item">
           <div class="buttons">
             <!-- Check that the SDK client is not currently loading before accessing is methods -->
-            <div v-if="!$auth.loading">
-              <!-- show login when not authenticated -->
-              <router-link to="/signup" class="button is-dark"
-                >Sign up</router-link
-              >
-              <a
+            <!-- show login when not authenticated -->
+            <router-link
+              v-if="$store.state.dbUser === undefined"
+              to="/signup"
+              class="button is-dark"
+              >Sign up</router-link
+            >
+            <router-link
+              v-if="$store.state.dbUser === undefined"
+              to="/login"
+              class="button is-dark"
+              >Log in</router-link
+            >
+            <!-- <a
                 v-if="!$auth.isAuthenticated"
                 @click="login"
                 class="button is-dark"
                 id="signin-button"
                 ><strong>Sign in</strong></a
-              >
-              <!-- show logout when authenticated -->
-              <a
-                v-if="$auth.isAuthenticated"
-                @click="logout"
-                class="button is-dark"
-                id="logout-button"
-                ><strong>Log out</strong></a
-              >
-            </div>
+              > -->
+            <!-- show logout when authenticated -->
+            <a
+              v-if="$store.state.dbUser !== undefined"
+              @click="logout"
+              class="button is-dark"
+              id="logout-button"
+              ><strong>Log out</strong></a
+            >
           </div>
         </div>
       </div>
@@ -56,20 +63,28 @@
   </nav>
 </template>
 <script>
+import router from "../../router/index";
+import { store } from "../../store/index";
+
 export default {
   name: "Nav",
   methods: {
     // Log the user in
-    login() {
-      document.getElementById("signin-button").classList.add("is-loading");
-      this.$auth.checkSession();
-    },
+    // login() {
+    //   document.getElementById("signin-button").classList.add("is-loading");
+    //   this.$auth.checkSession();
+    // },
     // Log the user out
+    test() {
+      console.log(this.$store.state.dbUser);
+    },
     logout() {
       document.getElementById("logout-button").classList.add("is-loading");
-      this.$auth.logout({
-        returnTo: window.location.origin,
-      });
+      setTimeout(function() {
+        store.dispatch("logout").then((response) => {
+          router.push({ name: "Home" });
+        });
+      }, 200);
     },
     toggleNavbar() {
       let obj = document.getElementById("nav-click");

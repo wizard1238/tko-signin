@@ -22,6 +22,9 @@ library.add(faAngleDown);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
+import Dropdown from "vue-simple-search-dropdown";
+Vue.use(Dropdown);
+
 Vue.component("qrcode-scanner", {
   props: {
     qrbox: Number,

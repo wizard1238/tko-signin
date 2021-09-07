@@ -29,7 +29,6 @@ exports.updateStudent = function (req, res, next) {
   }
 
   studentModel.findById(req.body.studentId, function (err, student) {
-    console.log(student);
     student.firstName = req.body.firstName;
     student.lastName = req.body.lastName;
     student.department = req.body.department;

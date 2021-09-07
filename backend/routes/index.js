@@ -9,6 +9,7 @@ var auth = require("../controllers/auth");
 var qr = require("../controllers/qr");
 
 var updateValidator = require("../validators/updateValidator");
+var scanValidator = require("../validators/scanValidator");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -20,6 +21,6 @@ router.post("/qr", qr.createQR);
 router.get("/students", student.getStudents);
 router.post("/update", authMiddleware, updateValidator, student.updateStudent);
 router.post("/deleteStudent", student.deleteStudent);
-router.post("/scanned", signin.scanned);
+router.post("/scanned", authMiddleware, scanValidator, signin.scanned);
 
 module.exports = router;

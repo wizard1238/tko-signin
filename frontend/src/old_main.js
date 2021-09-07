@@ -22,30 +22,6 @@ library.add(faAngleDown);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
-Vue.component("qrcode-scanner", {
-  props: {
-    qrbox: Number,
-    fps: Number,
-  },
-  template: `<div id="qr-code-full-region"></div>`,
-  mounted: function() {
-    var config = { fps: this.fps ? this.fps : 10 };
-    if (this.qrbox) {
-      config["qrbox"] = this.qrbox;
-    }
-
-    function onScanSuccess(qrCodeMessage) {
-      console.log(qrCodeMessage);
-    }
-
-    var html5QrcodeScanner = new Html5QrcodeScanner(
-      "qr-code-full-region",
-      config
-    );
-    html5QrcodeScanner.render(onScanSuccess);
-  },
-});
-
 // Install the authentication plugin here
 Vue.use(Auth0Plugin, {
   domain,
@@ -63,10 +39,7 @@ Vue.use(AuthPlugin);
 
 Vue.config.productionTip = false;
 
-import { store } from "./store/index";
-
 new Vue({
   router,
-  store,
   render: (h) => h(App),
 }).$mount("#app");

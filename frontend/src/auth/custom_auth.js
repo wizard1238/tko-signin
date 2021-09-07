@@ -21,6 +21,7 @@ export const useAuth = ({ ...options }) => {
     },
     methods: {
       async signupWithEmailPass(options) {
+        console.log("here");
         axios
           .post(process.env.VUE_APP_API_URL + "/signup", {
             firstName: options.first,
@@ -29,6 +30,8 @@ export const useAuth = ({ ...options }) => {
             password: options.password,
           })
           .then((res) => {
+            console.log("HI");
+            console.log(res);
             if (res.data.errors !== null) {
               this.user = res.data;
               return ["success"];
@@ -43,23 +46,26 @@ export const useAuth = ({ ...options }) => {
       },
 
       async loginWithEmailPass(options) {
-        axios
-          .post(process.env.VUE_APP_API_URL + "/login", {
+        axios({
+          method: "post",
+          url: process.env.VUE_APP_API_URL + "/login",
+          data: {
             email: options.email,
-            password: options.password,
-          })
-          .then((res) => {
-            if (res.data.errors !== null) {
-              this.user = res.data;
-              return ["success"];
-            } else {
-              let errorsObj = [];
-              for (const err in res.data.errors) {
-                errorsObj.push(res.data.errors[err].msg);
-              }
-              return errorsObj;
+            password: options.pass,
+          },
+          withCredentials: true,
+        }).then((res) => {
+          if (res.data.errors !== null) {
+            this.user = res.data;
+            return ["success"];
+          } else {
+            let errorsObj = [];
+            for (const err in res.data.errors) {
+              errorsObj.push(res.data.errors[err].msg);
             }
-          });
+            return errorsObj;
+          }
+        });
       },
 
       logout(o) {},

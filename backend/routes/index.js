@@ -1,11 +1,14 @@
 var express = require("express");
-var passport = require("passport")
+var passport = require("passport");
+var authMiddleware = require("./authMiddleware");
 var router = express.Router();
 
 var student = require("../controllers/student");
 var signin = require("../controllers/signin");
-var auth = require("../controllers/auth")
+var auth = require("../controllers/auth");
 var qr = require("../controllers/qr");
+
+var updateValidator = require("../validators/updateValidator");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -15,6 +18,7 @@ router.get("/", function (req, res, next) {
 router.post("/qr", qr.createQR);
 
 router.get("/students", student.getStudents);
+router.post("/update", authMiddleware, updateValidator, student.updateStudent);
 router.post("/deleteStudent", student.deleteStudent);
 router.post("/scanned", signin.scanned);
 

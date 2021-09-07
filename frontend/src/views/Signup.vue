@@ -1,10 +1,17 @@
 <template>
   <section class="hero">
+    <!-- <button @click="test">test</button> -->
     <div class="hero-body">
       <div class="container">
         <div class="columns is-centered">
           <div class="column is-5-tablet is-4-desktop is-3-widescreen">
-            <form id="signup-form" name="signup_form" action="" class="box">
+            <form
+              id="signup-form"
+              name="signup_form"
+              action=""
+              class="box"
+              @submit.prevent="signup"
+            >
               <div class="field">
                 <label for="" class="label">First Name</label>
                 <div class="control has-icons-left">
@@ -13,6 +20,7 @@
                     placeholder="e.g. Bob"
                     class="input"
                     name="firstname"
+                    v-model="first"
                     required
                   />
                   <span class="icon is-small is-left">
@@ -28,6 +36,7 @@
                     placeholder="e.g. Smith"
                     class="input"
                     name="lastname"
+                    v-model="last"
                     required
                   />
                   <span class="icon is-small is-left">
@@ -43,6 +52,7 @@
                     placeholder="e.g. bobsmith@gmail.com"
                     class="input"
                     name="email"
+                    v-model="email"
                     required
                   />
                   <span class="icon is-small is-left">
@@ -58,6 +68,7 @@
                     placeholder="*******"
                     class="input"
                     name="password"
+                    v-model="pass"
                     required
                   />
                   <span class="icon is-small is-left">
@@ -73,6 +84,7 @@
                     placeholder="*******"
                     class="input"
                     name="password_2"
+                    v-model="pass2"
                     required
                   />
                   <span class="icon is-small is-left">
@@ -82,8 +94,8 @@
               </div>
 
               <div class="field">
-                <button @click="signup" class="button is-success">
-                  Login
+                <button id="signup-b" type="submit" class="button is-success">
+                  Signup
                 </button>
               </div>
             </form>
@@ -99,64 +111,34 @@ import axios from "axios";
 
 export default {
   name: "Signup",
+  data() {
+    return {
+      first: "",
+      last: "",
+      email: "",
+      pass: "",
+      pass2: "",
+    };
+  },
   methods: {
-    signup() {
-      function allLetter(uname) {
-        var letters = /^[A-Za-z]+$/;
-        if (uname.value.match(letters)) {
-          return true;
-        } else {
-          alert("First and last name must contain only alphabet characters.");
-          uname.focus();
-          return false;
-        }
-      }
-
-      function validateEmail(uemail) {
-        var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (uemail.value.match(mailformat)) {
-          return true;
-        } else {
-          alert("Invalid email address.");
-          uemail.focus();
-          return false;
-        }
-      }
-
-      let first = document.signup_form.firstname;
-      let last = document.signup_form.lastname;
-      let email = document.signup_form.email;
-      let pass = document.signup_form.password;
-      let pass2 = document.signup_form.password_2;
-
-      if (!allLetter(first)) return;
-      if (!allLetter(last)) return;
-      if (!validateEmail(email)) return;
-      if (pass.value !== pass2.value) {
+    test() {
+      console.log(this.$store.state);
+    },
+    async signup() {
+      document.getElementById("signup-b").classList.add("is-loading");
+      if (this.pass.value !== this.pass2.value) {
         alert("Passwords must match.");
         return;
       }
-      if (pass.value.length < 7) {
-        alert("Password must be 7 characters or more.");
-        return;
-      }
 
-      const res = this.$dbAuth.signupWithEmailPass({
-        firstName: first,
-        lastName: last,
-        email: email,
-        password: password,
+      this.$store.dispatch("signUpWithEmailPass", {
+        options: {
+          first: this.first,
+          last: this.last,
+          email: this.email,
+          password: this.pass,
+        },
       });
-
-      if (res[0] !== "success") {
-        alert(res.join("\n"));
-        return;
-      } else {
-        this.$dbAuth.loginWithEmailPass({
-          email: email,
-          password: password,
-        });
-      }
     },
   },
 };

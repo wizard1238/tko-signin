@@ -52,7 +52,7 @@
                         <div class="columns is-vcentered">
                           <div class="column is-5">
                             <h3
-                              class="is-size-4 has-text-left has-text-weight-bold"
+                              class="is-size-4 has-text-left has-text-weight-bold is-size-5-tablet"
                               style="display: inline-block"
                             >
                               Present:

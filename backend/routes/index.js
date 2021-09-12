@@ -7,6 +7,7 @@ var student = require("../controllers/student");
 var signin = require("../controllers/signin");
 var auth = require("../controllers/auth");
 var qr = require("../controllers/qr");
+var vrt = require("../controllers/virtual_attendance");
 
 var userModel = require("../models/studentModel");
 
@@ -19,6 +20,7 @@ router.get("/", function (req, res, next) {
 });
 
 router.post("/qr", qr.createQR);
+router.post("/screenshot", vrt.obtainScreenshot);
 
 router.get("/students", authMiddleware(true), student.getStudents);
 router.post(

@@ -15,10 +15,11 @@ import Fragment from "vue-fragment";
 Vue.use(Fragment.Plugin);
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faUpload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 library.add(faAngleDown);
+library.add(faUpload);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 

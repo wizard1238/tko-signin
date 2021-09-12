@@ -91,9 +91,14 @@
                     >
                     <br /><br />
                     <router-link to="/studentdata" class="button is-warning "
-                      >Student Data</router-link
+                      >View Student Data</router-link
                     >
                     <br /><br />
+                    <router-link to="/screenshot" class="button is-warning "
+                      >Upload Attendance Screenshot</router-link
+                    >
+                    <br /><br />
+                    <br />
                     <button
                       @click="openAYS"
                       id="signoutall"

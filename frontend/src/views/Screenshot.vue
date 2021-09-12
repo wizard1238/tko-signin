@@ -44,7 +44,7 @@
       Submit
     </button>
     <h4 class="is-size-6 has-text-weight-light is-family-sans-serif">
-      <span class="tag is-danger is-light">Note</span>
+      <span class="tag is-warning ">Note</span>
       Make sure first names and last names are clearly in view.
     </h4>
   </div>

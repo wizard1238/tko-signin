@@ -4,7 +4,7 @@
       Attendance Upload
     </h1>
     <h4 class="is-size-5 has-text-weight-light is-family-sans-serif">
-      Upload a screenshot or scan of attendance documents here.
+      Upload a screenshot or a scan of attendance documents here.
     </h4>
 
     <span class="tag is-danger is-hidden" id="error"

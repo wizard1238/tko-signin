@@ -20,12 +20,13 @@
               </thead>
               <tbody>
                 <template v-for="student in students">
-                  <tr :key="student.id">
+                  <tr :key="student._id">
                     <td>{{ student.firstName + " " + student.lastName }}</td>
                     <td>{{ student.totalSeconds }}</td>
                     <td>{{ student.department }}</td>
                     <td>{{ student.grade }}</td>
                     <td>{{ student.present }}</td>
+                    <td><button @click="resetPassword(student._id, 'welcome')">Reset Password</button></td>
                   </tr>
                 </template>
               </tbody>
@@ -81,6 +82,16 @@ export default {
         });
       });
     },
+    resetPassword(studentId, newPassword) {
+      this.$store.dispatch("resetPass", {
+        options: {
+          studentId: studentId,
+          password: newPassword,
+        }
+      })
+        .then((res) => {console.log(res)})
+        .catch((err) => {console.log(err)})
+    }
   },
   mounted: function() {
     this.showData();

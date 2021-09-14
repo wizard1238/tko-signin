@@ -17,6 +17,7 @@ const store = new Vuex.Store({
   actions: {
     signUpWithEmailPass(state, { options }) {
       return new Promise((resolve, reject) => {
+        console.log(process.env.VUE_APP_API_URL + "/signup")
         axios
           .post(process.env.VUE_APP_API_URL + "/signup", {
             email: options.email,

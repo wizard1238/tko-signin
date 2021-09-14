@@ -1,3 +1,5 @@
+version: '3.4'
+
 services:
   backend:
     build: ./backend
@@ -5,9 +7,10 @@ services:
       - SECRET=supersecretsecretsyay
       - MONGODB=mongodb://root:welcome@mongo:27017/signin?authSource=admin
   frontend:
-    build: ./frontend
-    environment:
-      - VUE_APP_API_URL=http://backend:3000
+    build: 
+      context: ./frontend
+      args:
+        - VUE_APP_API_URL="dockerfile"
   nginx:
     build: ./nginx
     ports: 

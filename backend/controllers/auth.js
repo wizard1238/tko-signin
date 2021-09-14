@@ -12,7 +12,6 @@ var studentModel = require("../models/studentModel");
  */
 exports.signup = function (req, res, next) {
   var errors = validationResult(req);
-  console.log(errors);
   if (!errors.isEmpty()) {
     return res.status(400).send({ errors: errors.array() });
   }
@@ -37,3 +36,32 @@ exports.signup = function (req, res, next) {
     });
   });
 };
+
+/**
+ * Resets password
+ * req.body.studendId: mongoid of the student
+ * req.body.newPassword: new password
+ */
+exports.resetPassword = function(req, res, next) {
+  var errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).send({ errors: errors.array() });
+  }
+
+  studentModel.findById(req.body.studentId, function (err, student) {
+    if (err) console.log(err)
+    bcrypt.hash(req.body.newPassword, 10, function(err, hash) {
+      if (err) console.log(err)
+
+      student.password = hash
+      student.save(function (err, savedStudent) {
+        if (err) {
+          console.log(err);
+          res.sendStatus(500);
+        } else {
+          res.sendStatus(200);
+        }
+      });
+    })
+  })
+}

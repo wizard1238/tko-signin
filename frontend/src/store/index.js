@@ -59,7 +59,6 @@ const store = new Vuex.Store({
             resolve(res.data);
           })
           .catch((err) => {
-            // alert("Invalid Credentials.");
             reject(err.response.data.errors);
           });
       });

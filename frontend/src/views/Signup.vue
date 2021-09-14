@@ -1,7 +1,7 @@
 <template>
   <section class="hero">
-    <!-- <button @click="test">test</button> -->
     <div class="hero-body">
+      <button @click="test">test</button>
       <div class="container">
         <div class="columns is-centered">
           <div class="column is-5-tablet is-4-desktop is-3-widescreen">
@@ -15,6 +15,7 @@
               class="box"
               @submit.prevent="signup"
             >
+            <p>hiiiiiiiiiiiiiii</p>
               <div class="field">
                 <label for="" class="label">First Name</label>
                 <div class="control has-icons-left">
@@ -110,7 +111,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import router from "../router/index";
 
 export default {
@@ -128,6 +128,8 @@ export default {
   methods: {
     test() {
       console.log(this.$store.state);
+      console.log("Hi")
+      console.log(process.env.VUE_APP_API_URL)
     },
     async signup() {
       document.getElementById("signup-b").classList.add("is-loading");
@@ -135,7 +137,6 @@ export default {
         alert("Passwords must match.");
         return;
       }
-
       this.$store
         .dispatch("signUpWithEmailPass", {
           options: {

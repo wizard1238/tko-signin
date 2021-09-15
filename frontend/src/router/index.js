@@ -9,6 +9,7 @@ import Signup from "../views/Signup";
 import QRScanner from "../views/QRScanner";
 import StudentData from "../views/StudentData";
 import Screenshot from "../views/Screenshot";
+import PathRedirect from "../components/PathRedirect";
 
 Vue.use(VueRouter);
 
@@ -57,6 +58,10 @@ const routes = [
     name: "StudentData",
     component: StudentData,
     beforeEnter: adminGuard,
+  },
+  {
+    path: "*",
+    component: PathRedirect,
   },
 ];
 

@@ -1,6 +1,5 @@
 <template>
   <section class="hero">
-    <!-- <button @click="test">test</button> -->
     <div class="hero-body">
       <div class="container">
         <div class="columns is-centered">
@@ -110,7 +109,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import router from "../router/index";
 
 export default {
@@ -126,16 +124,12 @@ export default {
     };
   },
   methods: {
-    test() {
-      console.log(this.$store.state);
-    },
     async signup() {
       document.getElementById("signup-b").classList.add("is-loading");
       if (this.pass.value !== this.pass2.value) {
         alert("Passwords must match.");
         return;
       }
-
       this.$store
         .dispatch("signUpWithEmailPass", {
           options: {

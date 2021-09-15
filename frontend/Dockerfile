@@ -1,4 +1,6 @@
 FROM node:14-alpine as build
+ARG VUE_APP_API_URL
+ENV VUE_APP_API_URL=$VUE_APP_API_URL
 WORKDIR /app
 COPY ["package.json", "yarn.lock", "./"]
 RUN yarn install

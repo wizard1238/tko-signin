@@ -22,6 +22,7 @@ mongoose.connect(process.env.MONGODB);
 var passport = require("passport");
 var studentModel = require("./models/studentModel");
 var LocalStrategy = require("passport-local").Strategy;
+var GoogleStrategy = require("passport-google-oauth").OAuth2Strategy
 
 passport.use(
   new LocalStrategy(

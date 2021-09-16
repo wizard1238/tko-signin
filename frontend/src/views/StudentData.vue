@@ -7,6 +7,7 @@
             <h1 class="is-size-2 has-text-weight-bold is-family-code">
               Students
             </h1>
+            <p>Students present: {{ studentsPresent }} | Students total: {{ studentsTotal }}</p>
             <br />
             <table class="table is-hoverable is-fullwidth">
               <thead>
@@ -26,12 +27,12 @@
                     <td>{{ student.department }}</td>
                     <td>{{ student.grade }}</td>
                     <td>{{ student.present }}</td>
-                    <td><button @click="student.shown = !student.shown">Reset Password</button></td>
+                    <td><button @click="student.shown = !student.shown" class="button is-danger">Reset Password</button></td>
                     <div v-if="student.shown">
                       <form id="password-reset-form" name="password-reset-form" @submit.prevent="resetPassword(student._id, student.newPassword)">
-                        <label for="new-password">Enter new password: </label>
-                        <input type="text" v-model="student.newPassword" id="new-password" name="new-password">
-                        <button type="submit">Reset</button>
+                        <label for="new-password" class="label">Enter new password: </label>
+                        <input type="text" v-model="student.newPassword" class="input" id="new-password" name="new-password">
+                        <button type="submit" class="button">Reset</button>
                       </form>
                     </div>
                   </tr>
@@ -72,7 +73,12 @@ export default {
   methods: {
     showData() {
       this.$store.dispatch("getAllStudents").then((data) => {        
+        this.studentsTotal = data.length
         for (let student of data) {
+
+          if (student.present) {
+            this.studentsPresent++
+          }
 
           this.students.push({
             ...student,
@@ -117,6 +123,8 @@ export default {
     return {
       times: [],
       students: [],
+      studentsPresent: 0,
+      studentsTotal: 0,
     };
   },
 };

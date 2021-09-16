@@ -48,6 +48,31 @@ passport.use(
   )
 );
 
+passport.use(
+  new GoogleStrategy({
+    clientID: process.env.clientID,
+    clientSecret: process.env.clientSecret,
+    callbackURL: process.env.BASEURL + "/auth/google/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    studentModel.findOne({email: profile.email}, function(err, student) {
+      if (student) {
+        done(err, student)
+      } else {
+        var newStudent = new studentModel({
+          firstName: profile._json.given_name,
+          lastName: profile._json.family_name,
+          email: profile._json.email,
+          password: undefined
+        })
+        newStudent.save(function(err) {
+          done(err, newStudent)
+        })
+      }
+    })
+  })
+)
+
 passport.serializeUser(function (user, done) {
   done(null, user._id);
 });

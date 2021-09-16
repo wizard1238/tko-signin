@@ -31,13 +31,9 @@
 <script>
 export default {
   name: "home",
-  methods: {
-    // Log the user in
-    login() {
-      document.getElementById("sign-in-now-button").classList.add("is-loading");
-      this.$auth.checkSession();
-    },
-  },
+  mounted() {
+    this.$store.dispatch("getUser")
+  }
 };
 </script>
 <style lang="scss" scoped>

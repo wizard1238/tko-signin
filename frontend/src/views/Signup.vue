@@ -7,6 +7,7 @@
             <span class="tag is-danger is-hidden" id="invalid-pass">{{
               errormsg
             }}</span>
+            <a v-bind:href="apiUrl + '/auth/google'">Google</a>
             <form
               id="signup-form"
               name="signup_form"
@@ -121,6 +122,7 @@ export default {
       pass: "",
       pass2: "",
       errormsg: "Invalid Parameters",
+      apiUrl: process.env.VUE_APP_API_URL
     };
   },
   methods: {

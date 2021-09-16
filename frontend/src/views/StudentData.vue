@@ -26,7 +26,14 @@
                     <td>{{ student.department }}</td>
                     <td>{{ student.grade }}</td>
                     <td>{{ student.present }}</td>
-                    <td><button @click="resetPassword(student._id, 'welcome')">Reset Password</button></td>
+                    <td><button @click="student.shown = !student.shown">Reset Password</button></td>
+                    <div v-if="student.shown">
+                      <form id="password-reset-form" name="password-reset-form" @submit.prevent="resetPassword(student._id, student.newPassword)">
+                        <label for="new-password">Enter new password: </label>
+                        <input type="text" v-model="student.newPassword" id="new-password" name="new-password">
+                        <button type="submit">Reset</button>
+                      </form>
+                    </div>
                   </tr>
                 </template>
               </tbody>
@@ -64,9 +71,15 @@ export default {
   name: "StudentData",
   methods: {
     showData() {
-      this.$store.dispatch("getAllStudents").then((data) => {
-        this.students = data;
+      this.$store.dispatch("getAllStudents").then((data) => {        
         for (let student of data) {
+
+          this.students.push({
+            ...student,
+            shown: false,
+            newPassword: "",
+          })
+
           for (let time of student.times) {
             this.times.push({
               name: student.firstName + " " + student.lastName,
@@ -89,9 +102,13 @@ export default {
           password: newPassword,
         }
       })
-        .then((res) => {console.log(res)})
-        .catch((err) => {console.log(err)})
-    }
+        .then((res) => {})
+        .catch((err) => {alert(err[0].msg)})
+
+      let student = this.students.find((student) => student._id == studentId)
+      student.shown = false
+      student.newPassword = ""
+    },
   },
   mounted: function() {
     this.showData();

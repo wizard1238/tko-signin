@@ -52,7 +52,7 @@ passport.use(
   new GoogleStrategy({
     clientID: process.env.clientID,
     clientSecret: process.env.clientSecret,
-    callbackURL: process.env.BASEURL + "/auth/google/callback"
+    callbackURL: process.env.BACKEND_URL + "/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     studentModel.findOne({email: profile._json.email}, function(err, student) {

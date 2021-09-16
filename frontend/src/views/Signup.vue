@@ -7,7 +7,6 @@
             <span class="tag is-danger is-hidden" id="invalid-pass">{{
               errormsg
             }}</span>
-            <a v-bind:href="apiUrl + '/auth/google'">Google</a>
             <form
               id="signup-form"
               name="signup_form"
@@ -102,6 +101,10 @@
                 </button>
               </div>
             </form>
+            <p>Or</p>
+            <div class="box columns m-1 is-vcentered">
+              <a class="button column is-success" v-bind:href="apiUrl + '/auth/google'">Sign up with Google</a>
+            </div>
           </div>
         </div>
       </div>

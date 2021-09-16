@@ -54,6 +54,10 @@
                 </button>
               </div>
             </form>
+            <p>Or</p>
+            <div class="box columns m-1 is-vcentered">
+              <a class="button column is-success" v-bind:href="apiUrl + '/auth/google'">Log in with Google</a>
+            </div>
           </div>
         </div>
       </div>
@@ -71,6 +75,7 @@ export default {
     return {
       email: "",
       pass: "",
+      apiUrl: process.env.VUE_APP_API_URL
     };
   },
   methods: {

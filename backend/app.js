@@ -55,7 +55,7 @@ passport.use(
     callbackURL: process.env.BASEURL + "/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    studentModel.findOne({email: profile.email}, function(err, student) {
+    studentModel.findOne({email: profile._json.email}, function(err, student) {
       if (student) {
         done(err, student)
       } else {

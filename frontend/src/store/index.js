@@ -42,6 +42,25 @@ const store = new Vuex.Store({
           });
       });
     },
+    resetPass(state, { options }) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: "post",
+          url: process.env.VUE_APP_API_URL + "/resetPassword",
+          data: {
+            studentId: options.studentId,
+            newPassword: options.password,
+          },
+          withCredentials: true,
+        })
+          .then((res) => {
+            resolve(res.data)
+          })
+          .catch((err) => {
+            reject(err.response.data.errors)
+          })
+      })
+    },
     loginWithEmailPass(state, { options }) {
       return new Promise((resolve, reject) => {
         axios({

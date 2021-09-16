@@ -6,7 +6,8 @@ var router = express.Router();
 
 var auth = require("../controllers/auth");
 
-var signUpValidator = require("../validators/signUpValidator");
+var signUpValidator = require("../validators/signUpValidator")
+var resetPasswordValidator = require("../validators/resetPasswordValidator")
 
 router.post("/signup", signUpValidator, auth.signup);
 
@@ -37,5 +38,12 @@ router.post("/logout", authMiddleware(false), function (req, res, next) {
   req.logout();
   res.sendStatus(200);
 });
+
+router.post(
+  "/resetPassword",
+  authMiddleware(true),
+  resetPasswordValidator,
+  auth.resetPassword
+)
 
 module.exports = router;

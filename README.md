@@ -24,4 +24,4 @@ VUE_APP_API_URL=<api url>
 MONGO_INITDB_ROOT_USERNAME=<username>
 MONGO_INITDB_ROOT_PASSWORD=<password>
 ```
-The last two env variables are only needed if you want to run mongodb with docker compose. If you have a separate mongo database, comment out the mongo section in the docker compose and omit the last two env variables.
+The last two env variables are only needed if you want to run mongodb with docker compose. If you have a separate mongo database, comment out the mongo and nginx sections in the docker compose and omit the last two env variables.

@@ -83,6 +83,20 @@ const store = new Vuex.Store({
           });
       });
     },
+    getUser(state) {
+      axios.get(process.env.VUE_APP_API_URL + "/user", {
+        withCredentials: true
+      })
+      .then((res) => {
+        store.commit("changeUser", {
+          user: res.data,
+        });
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err.response.data.errors);
+      });
+    },
     signEveryoneOut(state) {
       axios({
         method: "post",

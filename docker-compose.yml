@@ -6,11 +6,15 @@ services:
     environment:
       - SECRET=$SECRET
       - MONGODB=$MONGODB
+      - clientId=$clientID
+      - clientSecret=$clientSecret
+      - BACKEND_URL=$BACKEND_URL
+      - FRONTEND_URL=$FRONTEND_URL
   frontend:
     build: 
       context: ./frontend
       args:
-        - VUE_APP_API_URL=$VUE_APP_API_URL
+        - VUE_APP_API_URL=$BACKEND_URL
   nginx:
     build: ./nginx
     ports: 

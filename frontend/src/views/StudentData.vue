@@ -16,6 +16,7 @@
                   <th>Total time (seconds)</th>
                   <th>Department</th>
                   <th>Grade</th>
+                  <th>Admin</th>
                   <th>Present</th>
                 </tr>
               </thead>
@@ -26,12 +27,13 @@
                     <td>{{ student.totalSeconds }}</td>
                     <td>{{ student.department }}</td>
                     <td>{{ student.grade }}</td>
+                    <td>{{ student.admin }}</td>
                     <td>{{ student.present }}</td>
                     <td><button @click="student.shown = !student.shown" class="button is-danger">Reset Password</button></td>
                     <div v-if="student.shown">
                       <form id="password-reset-form" name="password-reset-form" @submit.prevent="resetPassword(student._id, student.newPassword)">
                         <label for="new-password" class="label">Enter new password: </label>
-                        <input type="text" v-model="student.newPassword" class="input" id="new-password" name="new-password">
+                        <input type="password" v-model="student.newPassword" class="input" id="new-password" name="new-password">
                         <button type="submit" class="button">Reset</button>
                       </form>
                     </div>

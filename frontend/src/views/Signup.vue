@@ -101,6 +101,10 @@
                 </button>
               </div>
             </form>
+            <p>Or</p>
+            <div class="box columns m-1 is-vcentered">
+              <a class="button column is-success" v-bind:href="apiUrl + '/auth/google'">Sign up with Google</a>
+            </div>
           </div>
         </div>
       </div>
@@ -121,6 +125,7 @@ export default {
       pass: "",
       pass2: "",
       errormsg: "Invalid Parameters",
+      apiUrl: process.env.VUE_APP_API_URL
     };
   },
   methods: {

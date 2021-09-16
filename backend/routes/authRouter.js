@@ -31,7 +31,7 @@ router.post("/login", function (req, res, next) {
   })(req, res, next);
 });
 
-router.post("/user", authMiddleware(false), function (req, res, next) {
+router.get("/user", authMiddleware(false), function (req, res, next) {
   res.send(req.user);
 });
 router.post("/logout", authMiddleware(false), function (req, res, next) {
@@ -45,5 +45,10 @@ router.post(
   resetPasswordValidator,
   auth.resetPassword
 )
+
+router.get("/auth/google", passport.authenticate("google", {scope: ["https://www.googleapis.com/auth/userinfo.email profile"]}))
+router.get("/auth/google/callback", passport.authenticate("google", {failureRedirect: "/login"}), function(req, res, next) {
+  res.redirect(process.env.FRONTEND_URL + "/")
+})
 
 module.exports = router;

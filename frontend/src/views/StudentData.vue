@@ -16,6 +16,7 @@
                   <th>Total time (seconds)</th>
                   <th>Department</th>
                   <th>Grade</th>
+                  <th>Admin</th>
                   <th>Present</th>
                 </tr>
               </thead>
@@ -26,6 +27,7 @@
                     <td>{{ student.totalSeconds }}</td>
                     <td>{{ student.department }}</td>
                     <td>{{ student.grade }}</td>
+                    <td>{{ student.admin }}</td>
                     <td>{{ student.present }}</td>
                     <td><button @click="student.shown = !student.shown" class="button is-danger">Reset Password</button></td>
                     <div v-if="student.shown">

@@ -7,7 +7,10 @@
             <h1 class="is-size-2 has-text-weight-bold is-family-code">
               Students
             </h1>
-            <p>Students present: {{ studentsPresent }} | Students total: {{ studentsTotal }}</p>
+            <p>
+              Students present: {{ studentsPresent }} | Students total:
+              {{ studentsTotal }}
+            </p>
             <br />
             <table class="table is-hoverable is-fullwidth">
               <thead>
@@ -29,12 +32,44 @@
                     <td>{{ student.grade }}</td>
                     <td>{{ student.admin }}</td>
                     <td>{{ student.present }}</td>
-                    <td><button @click="student.shown = !student.shown" class="button is-danger">Reset Password</button></td>
+                    <td>
+                      <button
+                        @click="student.shown = !student.shown"
+                        class="button is-danger"
+                      >
+                        Reset Password
+                      </button>
+                    </td>
                     <div v-if="student.shown">
-                      <form id="password-reset-form" name="password-reset-form" @submit.prevent="resetPassword(student._id, student.newPassword)">
-                        <label for="new-password" class="label">Enter new password: </label>
-                        <input type="password" v-model="student.newPassword" class="input" id="new-password" name="new-password">
-                        <button type="submit" class="button">Reset</button>
+                      <form
+                        id="password-reset-form"
+                        name="password-reset-form"
+                        @submit.prevent="
+                          resetPassword(student._id, student.newPassword)
+                        "
+                      >
+                        <div class="columns is-vcentered is-centered">
+                          <div class="column is-full">
+                            <p
+                              class="is-size-6 has-text-centered has-text-weight-bold is-family-monospace"
+                            >
+                              Enter new password
+                            </p>
+                            <input
+                              type="password"
+                              v-model="student.newPassword"
+                              class="input"
+                              id="new-password"
+                              name="new-password"
+                            />
+                            <button
+                              type="submit"
+                              class="button is-primary is-light reset-btn"
+                            >
+                              Reset
+                            </button>
+                          </div>
+                        </div>
                       </form>
                     </div>
                   </tr>
@@ -74,19 +109,18 @@ export default {
   name: "StudentData",
   methods: {
     showData() {
-      this.$store.dispatch("getAllStudents").then((data) => {        
-        this.studentsTotal = data.length
+      this.$store.dispatch("getAllStudents").then((data) => {
+        this.studentsTotal = data.length;
         for (let student of data) {
-
           if (student.present) {
-            this.studentsPresent++
+            this.studentsPresent++;
           }
 
           this.students.push({
             ...student,
             shown: false,
             newPassword: "",
-          })
+          });
 
           for (let time of student.times) {
             this.times.push({
@@ -104,18 +138,21 @@ export default {
       });
     },
     resetPassword(studentId, newPassword) {
-      this.$store.dispatch("resetPass", {
-        options: {
-          studentId: studentId,
-          password: newPassword,
-        }
-      })
+      this.$store
+        .dispatch("resetPass", {
+          options: {
+            studentId: studentId,
+            password: newPassword,
+          },
+        })
         .then((res) => {})
-        .catch((err) => {alert(err[0].msg)})
+        .catch((err) => {
+          alert(err[0].msg);
+        });
 
-      let student = this.students.find((student) => student._id == studentId)
-      student.shown = false
-      student.newPassword = ""
+      let student = this.students.find((student) => student._id == studentId);
+      student.shown = false;
+      student.newPassword = "";
     },
   },
   mounted: function() {
@@ -137,5 +174,13 @@ export default {
   align-content: center;
   align-items: center;
   justify-content: center;
+}
+
+.reset-btn {
+  margin: 0 auto;
+}
+
+table {
+  background: transparent;
 }
 </style>

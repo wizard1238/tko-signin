@@ -28,14 +28,6 @@
             class="img-borderify"
           />
           <br />
-          <button
-            @click="toggleQR"
-            class="button is-danger is-light is-medium regenerate-button"
-          >
-            {{ toggleType }}
-          </button>
-          <h4 class="is-size-6 is-italic">(click to toggle)</h4>
-          <br />
         </div>
 
         <!-- Any other Bulma elements you want -->
@@ -57,7 +49,6 @@ export default {
   data() {
     return {
       qrCode: "",
-      toggleType: "Student ID",
     };
   },
   methods: {
@@ -71,21 +62,10 @@ export default {
       document.getElementsByTagName("html")[0].classList.remove("is-clipped");
       this.$store.dispatch("retrieveNewData");
     },
-    toggleQR() {
-      if (this.toggleType === "Student ID") {
-        this.toggleType = "Email";
-      } else {
-        this.toggleType = "Student ID";
-      }
-      this.getQR();
-    },
     getQR() {
       axios
         .post(process.env.VUE_APP_API_URL + "/qr", {
-          link:
-            this.toggleType === "Student ID"
-              ? this.$store.state.dbUser._id
-              : this.$store.state.dbUser.email,
+          link: this.$store.state.dbUser._id,
         })
         .then((res) => {
           this.qrCode = res.data;

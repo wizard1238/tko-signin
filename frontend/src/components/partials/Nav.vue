@@ -115,4 +115,10 @@ nav {
     }
   }
 }
+
+.navbar {
+  background: transparent;
+  margin-top: 0;
+  padding-top: 25px;
+}
 </style>

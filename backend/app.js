@@ -50,7 +50,7 @@ passport.use(
 
 passport.use(
   new GoogleStrategy({
-    clientID: process.env.clientId,
+    clientID: process.env.clientID,
     clientSecret: process.env.clientSecret,
     callbackURL: process.env.BACKEND_URL + "/auth/google/callback"
   },

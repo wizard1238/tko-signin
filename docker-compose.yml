@@ -6,7 +6,7 @@ services:
     environment:
       - SECRET=$SECRET
       - MONGODB=$MONGODB
-      - clientId=$clientID
+      - clientID=$clientID
       - clientSecret=$clientSecret
       - BACKEND_URL=$BACKEND_URL
       - FRONTEND_URL=$FRONTEND_URL

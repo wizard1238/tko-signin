@@ -13,7 +13,7 @@ SECRET=supersecretsecretsyay
 MONGODB=mongodb://localhost:27017/signin
 BACKEND_URL=<backend url>
 FRONTEND_URL=<frontend url>
-clientID=<clientId from google console>
+clientID=<clientID from google console>
 clientSecret=<clientSecret from google console>
 ```
 Frontend:
@@ -28,7 +28,7 @@ SECRET=<secret>
 MONGODB=<mongodb address>
 BACKEND_URL=<backend url>
 FRONTEND_URL=<frontend url>
-clientID=<clientId from google console>
+clientID=<clientID from google console>
 clientSecret=<clientSecret from google console>
 MONGO_INITDB_ROOT_USERNAME=<username>
 MONGO_INITDB_ROOT_PASSWORD=<password>

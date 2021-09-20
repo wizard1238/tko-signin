@@ -88,6 +88,7 @@ app.use(
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({ client: mongoose.connections[0].client })
   })
 );
 

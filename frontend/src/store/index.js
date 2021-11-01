@@ -130,7 +130,7 @@ const store = new Vuex.Store({
     },
     retrieveNewData(state) {
       axios({
-        method: "post",
+        method: "get",
         url: process.env.VUE_APP_API_URL + "/user",
         withCredentials: true,
       }).then((res) => {

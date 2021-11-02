@@ -7,7 +7,7 @@ module.exports = new checkSchema({
       errorMessage: "Please provide a studentId",
     },
     custom: {
-      options: (value) => {
+      options: (value) => { 
         return studentModel.findById(value).then((student) => {
           if (!student) {
             return Promise.reject("Student not found");

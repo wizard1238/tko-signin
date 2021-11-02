@@ -8,6 +8,7 @@ var auth = require("../controllers/auth");
 
 var signUpValidator = require("../validators/signUpValidator")
 var resetPasswordValidator = require("../validators/resetPasswordValidator")
+var toggleAdminValidator = require("../validators/toggleAdminValidator")
 
 router.post("/signup", signUpValidator, auth.signup);
 
@@ -45,6 +46,8 @@ router.post(
   resetPasswordValidator,
   auth.resetPassword
 )
+
+router.post("/toggleAdmin", authMiddleware(true), toggleAdminValidator, auth.toggleAdmin)
 
 router.get("/auth/google", passport.authenticate("google", {scope: ["https://www.googleapis.com/auth/userinfo.email profile"]}))
 router.get("/auth/google/callback", passport.authenticate("google", {failureRedirect: "/login"}), function(req, res, next) {

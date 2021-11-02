@@ -65,3 +65,25 @@ exports.resetPassword = function(req, res, next) {
     })
   })
 }
+
+/**
+ * Gives admin perms or vice-versa
+ * req.body.studentId: mongoid of the user to flip
+ */
+exports.toggleAdmin = function(req, res, next) {
+  var errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).send({errors: errors.array()})
+  }
+
+  studentModel.findById(req.body.studentId, function (err, student) {
+    if (err) console.log(err)
+    student.admin = !student.admin
+
+    student.save()
+    .then(() => {
+      res.sendStatus(200)
+    })
+    .catch((e) => console.log(e))
+  })
+}

@@ -94,6 +94,10 @@
                       >View Student Data</router-link
                     >
                     <br /><br />
+                    <router-link to="/signintimes" class="button is-warning "
+                      >View Signin Times</router-link
+                    >
+                    <br /><br />
                     <router-link to="/screenshot" class="button is-warning "
                       >Upload Attendance Screenshot</router-link
                     >

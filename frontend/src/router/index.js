@@ -8,6 +8,7 @@ import { adminGuard, authGuard } from "../auth/authGuard";
 import Signup from "../views/Signup";
 import QRScanner from "../views/QRScanner";
 import StudentData from "../views/StudentData";
+import SigninTimes from "../views/SigninTimes"
 import Screenshot from "../views/Screenshot";
 import PathRedirect from "../components/PathRedirect";
 
@@ -57,6 +58,12 @@ const routes = [
     path: "/studentdata",
     name: "StudentData",
     component: StudentData,
+    beforeEnter: adminGuard,
+  },
+  {
+    path: "/signintimes",
+    name: "SigninTimes",
+    component: SigninTimes,
     beforeEnter: adminGuard,
   },
   {

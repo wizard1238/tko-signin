@@ -97,6 +97,24 @@ const store = new Vuex.Store({
         reject(err.response.data.errors);
       });
     },
+    toggleAdmin(state, { studentId }) {
+      return new Promise((resolve) => {
+        axios({
+          method: "POST",
+          withCredentials: true,
+          url: process.env.VUE_APP_API_URL + "/toggleAdmin",
+          data: {
+            studentId: studentId,
+          }
+        })
+        .then(() => {
+          resolve()
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      })
+    },
     signEveryoneOut(state) {
       axios({
         method: "post",

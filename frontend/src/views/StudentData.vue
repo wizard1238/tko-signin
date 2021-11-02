@@ -20,6 +20,7 @@
                   <th>Department</th>
                   <th>Grade</th>
                   <th>Admin</th>
+                  <th></th>
                   <th>Present</th>
                 </tr>
               </thead>
@@ -31,6 +32,11 @@
                     <td>{{ student.department }}</td>
                     <td>{{ student.grade }}</td>
                     <td>{{ student.admin }}</td>
+                    <td>
+                      <button @click="toggleAdmin(student._id)" class="button is-danger">
+                        Toggle
+                      </button>
+                    </td>
                     <td>{{ student.present }}</td>
                     <td>
                       <button
@@ -77,28 +83,7 @@
               </tbody>
             </table>
           </div>
-          <div class="column">
-            <h1 class="is-size-2 has-text-weight-bold is-family-code">Time</h1>
-            <br />
-            <table class="table is-hoverable is-fullwidth">
-              <thead>
-                <tr>
-                  <th>Student Name</th>
-                  <th>Sign in / Sign out</th>
-                  <th>Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                <template v-for="time in times">
-                  <tr :key="time.id">
-                    <td>{{ time.name }}</td>
-                    <td>{{ time.action }}</td>
-                    <td>{{ time.time }}</td>
-                  </tr>
-                </template>
-              </tbody>
-            </table>
-          </div>
+          
         </div>
       </div>
     </section>
@@ -111,6 +96,7 @@ export default {
     showData() {
       this.$store.dispatch("getAllStudents").then((data) => {
         this.studentsTotal = data.length;
+        this.students = []
         for (let student of data) {
           if (student.present) {
             this.studentsPresent++;
@@ -121,20 +107,7 @@ export default {
             shown: false,
             newPassword: "",
           });
-
-          for (let time of student.times) {
-            this.times.push({
-              name: student.firstName + " " + student.lastName,
-              time: new Date(time.time * 1000).toLocaleString(),
-              seconds: time.time,
-              action: time.signin ? "Sign in" : "Sign out",
-            });
-          }
         }
-
-        this.times.sort((a, b) => {
-          return a.seconds - b.seconds;
-        });
       });
     },
     resetPassword(studentId, newPassword) {
@@ -154,13 +127,20 @@ export default {
       student.shown = false;
       student.newPassword = "";
     },
+    toggleAdmin(studentId) {
+      this.$store.dispatch("toggleAdmin", {
+        studentId: studentId
+      })
+      .then(() => {
+        this.showData()
+      })
+    }
   },
   mounted: function() {
     this.showData();
   },
   data() {
     return {
-      times: [],
       students: [],
       studentsPresent: 0,
       studentsTotal: 0,

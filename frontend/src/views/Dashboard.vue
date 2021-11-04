@@ -59,7 +59,7 @@
                             </h3>
                           </div>
                           <div class="column is-3">
-                            <button class="button is-link">
+                            <button class="button is-link" @click="togglePresent($store.state.dbUser._id)">
                               {{ this.$store.state.dbUser.present }}
                             </button>
                           </div>
@@ -184,6 +184,19 @@ export default {
       document.getElementById("areyousure").classList.remove("is-active");
       document.getElementsByTagName("html")[0].classList.remove("is-clipped");
     },
+    togglePresent(studentId) {
+      if (!this.$store.state.dbUser.admin) {
+        return
+      }
+      this.$store
+        .dispatch("studentScanned", {
+          studentId: studentId,
+        })
+      .then(() => {
+        this.$store.dispatch("retrieveNewData")
+      })
+      .catch((err) => console.log(err))
+    }
   },
 };
 </script>
